@@ -10,30 +10,67 @@ $(document).ready(function () {
         $("#animal-button-div").append(animalButtons)
     }
 
+    // What happens when button with animal name is clicked
     $(".animal-buttons").on("click", function () {
 
-        var animalClicked = $(this).attr("data-name")
+        var animalClicked = $(this).attr("data-name");
 
-        var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + animalClicked + "&api_key=cBF6mOa28IxsuL3NJAePU7rvf9cWdJXv"
+        var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + animalClicked + "&api_key=cBF6mOa28IxsuL3NJAePU7rvf9cWdJXv";
 
         $.ajax({
             url: queryURL,
             method: "GET"
         }).then(function (response) {
-            console.log(response.data)
 
-            for (var i = 0; i < response.data.length; i++) {
+            var results = response.data;
 
-                var imageUrl = response.data[i].images["480w_still"].url;
-                var gifURL = response.data[i].images.original.url;
-                var gifs = $("<img class='animal-img'>")
-                gifs.attr("src", imageUrl)
-                $("#animals").prepend(gifs)
+            console.log(results)
+
+            for (var i = 0; i < results.length; i++) {
+
+                var animalDiv = $("<div>");
+
+                var p = $("<p>").text("Rating: " + results[i].rating);
+
+                var animalImage = $("<img>");
+
+                var stillImageUrl = results[i].images.fixed_height_still.url;
+
+                var gifURL = results[i].images.fixed_height.url;
+
+                animalImage.attr("src", stillImageUrl)
+                animalImage.attr("still-image", stillImageUrl)
+                animalImage.attr("gif-image", gifURL)
+                animalImage.attr("data-state", "still")
+                animalImage.attr("class", "gif")
+
+                animalDiv.append(p);
+                animalDiv.append(animalImage);
+
+                $("#animals").prepend(animalDiv)
 
             }
 
         });
 
     });
+
+    $(document.body).on("click", ".gif", function () {
+
+        console.log(this);
+
+        var state = $(this).attr("data-state");
+
+        if (state === "still") {
+            $(this).attr("src", $(this).attr("gif-image"));
+            $(this).attr("data-state", "animate");
+        } else {
+            $(this).attr("src", $(this).attr("still-image"));
+            $(this).attr("data-state", "still");
+        }
+
+    });
+
+
 
 });
