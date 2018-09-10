@@ -4,14 +4,35 @@ $(document).ready(function () {
     var animals = ["dog", "cat", "goat", "hamster", "bird"]
 
     // Creates initial buttons using 'animals array'
-    for (var i = 0; i < animals.length; i++) {
-        var animalButtons = $("<button class='animal-buttons'>").text(animals[i])
-        animalButtons.attr("data-name", animals[i]);
-        $("#animal-button-div").append(animalButtons)
-    }
+    function createButtons() {
 
-    // What happens when button with animal name is clicked
-    $(".animal-buttons").on("click", function () {
+        for (var i = 0; i < animals.length; i++) {
+
+            var animalButtons = $("<button class='animal-buttons'>").text(animals[i])
+            animalButtons.attr("data-name", animals[i]);
+            $("#animal-button-div").append(animalButtons)
+
+        }
+    };
+    createButtons();
+
+    // Adds new buttons to the DOM
+    $("#animal-submit").on("click", function () {
+
+        event.preventDefault();
+
+        if ($("#animal-input").val() !== "") {
+            animals.push($("#animal-input").val())
+            $("#animal-button-div").empty()
+            createButtons()
+            $("#animal-input").val("")
+        }
+
+    });
+
+
+    // Populates the DOM with gifs
+    $(document.body).on("click", ".animal-buttons", function () {
 
         var animalClicked = $(this).attr("data-name");
 
@@ -55,6 +76,7 @@ $(document).ready(function () {
 
     });
 
+    // Starts and stops gifs on click
     $(document.body).on("click", ".gif", function () {
 
         console.log(this);
@@ -70,7 +92,5 @@ $(document).ready(function () {
         }
 
     });
-
-
 
 });
