@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
     // Stores values for initial buttons
-    var animals = ["dog", "cat", "goat", "hamster", "bird"]
+    var animals = ["dog", "cat", "goat", "hamster", "bird", "salamander", "goldfish"]
 
     // Creates initial buttons using 'animals array'
     function createButtons() {
@@ -30,7 +30,6 @@ $(document).ready(function () {
 
     });
 
-
     // Populates the DOM with gifs
     $(document.body).on("click", ".animal-buttons", function () {
 
@@ -45,18 +44,12 @@ $(document).ready(function () {
 
             var results = response.data;
 
-            console.log(results)
-
             for (var i = 0; i < results.length; i++) {
 
-                var animalDiv = $("<div>");
-
+                var animalDiv = $("<div class='img-divs'>");
                 var p = $("<p>").text("Rating: " + results[i].rating);
-
                 var animalImage = $("<img>");
-
                 var stillImageUrl = results[i].images.fixed_height_still.url;
-
                 var gifURL = results[i].images.fixed_height.url;
 
                 animalImage.attr("src", stillImageUrl)
@@ -78,8 +71,6 @@ $(document).ready(function () {
 
     // Starts and stops gifs on click
     $(document.body).on("click", ".gif", function () {
-
-        console.log(this);
 
         var state = $(this).attr("data-state");
 

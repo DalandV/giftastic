@@ -1,0 +1,39 @@
+body {
+    font-family: Arial, Helvetica, sans-serif
+}
+.animal-buttons {
+    background-color: #008B8B;
+    color: white;
+    border-radius: 5px;
+    margin: 0 5px 5px 0;
+}
+.animal-buttons:hover {
+    background-color: #005757;   
+}
+#animal-submit {
+    background-color: #008B8B;
+    color: white;
+    border-radius: 5px;
+}
+#animal-submit:hover{
+    background-color: #005757;
+}
+#animal-form {
+    float: right;
+}
+label {
+    display: block;
+}
+#animal-input {
+    display: block;
+    width: 200px;
+    padding: 5px;
+    border-radius: 2px;
+}
+#animals {
+    width: 75%;
+}
+.img-divs {
+    float: left;
+    margin-left: 15px;
+}
