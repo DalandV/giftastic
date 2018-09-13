@@ -35,7 +35,7 @@ $(document).ready(function () {
 
         var animalClicked = $(this).attr("data-name");
 
-        var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + animalClicked + "&api_key=cBF6mOa28IxsuL3NJAePU7rvf9cWdJXv";
+        var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + animalClicked + "&api_key=cBF6mOa28IxsuL3NJAePU7rvf9cWdJXv&limit=10";
 
         $.ajax({
             url: queryURL,
